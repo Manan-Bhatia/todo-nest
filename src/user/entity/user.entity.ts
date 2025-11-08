@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToMany,
+} from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { ApiHideProperty } from '@nestjs/swagger';
+import { Task } from 'src/task/entities/task.entity';
 
 @Entity()
 @Unique(['userName'])
@@ -15,4 +22,7 @@ export class User {
   @Exclude()
   @ApiHideProperty()
   passwordHash: string;
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 }
