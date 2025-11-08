@@ -29,12 +29,12 @@ export class UserService {
     return await this._userRepository.save(user);
   }
 
-  findAll() {
-    return this._userRepository.find();
+  findbyUserId(id: string) {
+    return this._userRepository.findOne({ where: { id } });
   }
 
-  async findByUserName(userName: string) {
-    return await this._userRepository.findOne({
+  findByUserName(userName: string) {
+    return this._userRepository.findOne({
       where: { userName },
       select: ['id', 'userName', 'passwordHash'],
     });

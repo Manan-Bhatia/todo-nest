@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
+import { JwtPayload } from './types/auth.types';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +26,8 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new BadRequestException('Invalid password');
     }
-    const accessToken = this._jwtService.sign({ sub: user.id });
+    const payload: JwtPayload = { sub: user.id };
+    const accessToken = this._jwtService.sign(payload);
     return { accessToken };
   }
 }
