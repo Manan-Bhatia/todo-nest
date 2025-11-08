@@ -72,8 +72,8 @@ import { validateEnvironmentVariables } from './global/configuration/validation'
       }),
     }),
     JwtModule.registerAsync({
+      global: true,
       useFactory: (configService: ConfigService) => ({
-        global: true,
         secret: configService.getOrThrow('jwt.secret'),
         signOptions: { expiresIn: '15m' },
       }),
