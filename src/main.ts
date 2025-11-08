@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Todo App')
     .setDescription('The Todo API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   SwaggerModule.setup(
     'swagger',
